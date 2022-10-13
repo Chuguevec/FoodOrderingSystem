@@ -5,17 +5,17 @@ import org.foodOrder.drink.DrinkAdditionalItem;
 import org.foodOrder.drink.DrinkItem;
 
 public class DrinkBuilder implements Builder {
-    Drink drink = new Drink();
+   private Drink drink = new Drink();
 
-    DrinkBuilder setDrink (DrinkItem drinkItem){
+   public DrinkBuilder setDrink (DrinkItem drinkItem){
         drink.setDrinkItem(drinkItem);
         return this;
     }
-    DrinkBuilder addAdditionalItem (DrinkAdditionalItem item){
+   public DrinkBuilder addAdditionalItem (DrinkAdditionalItem item){
         drink.getDrinkAdditionalItems().add(item);
         return this;
     }
-    Drink build (){
+   public Drink build (){
         return drink;
     }
 }

@@ -3,15 +3,17 @@ package org.foodOrder.lunch.italianLunch;
 import org.foodOrder.item.DesertItem;
 
 public enum ItalianDessert implements DesertItem {
-    ITALIAN_DESSERT(5F);
+    ITALIAN_DESSERT("Italian Dessert", 5F);
     private Float price;
+    private String name;
 
-    ItalianDessert(float price) {
+    ItalianDessert(String name, Float price) {
+        this.name = name;
         this.price = price;
     }
 
     public String getName() {
-        return name();
+        return name;
     }
 
     public Float getPrice() {

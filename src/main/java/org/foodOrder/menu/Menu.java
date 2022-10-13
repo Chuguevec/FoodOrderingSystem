@@ -14,9 +14,8 @@ public class Menu {
     private ItalianCuisine italianCuisine;
     private MexicanCuisine mexicanCuisine;
     private PolishCuisine polishCuisine;
-
-    List<DrinkItem> drinks;
-    List<DrinkAdditionalItem> drinkAdditionalItems;
+   private List<DrinkItem> drinks;
+   private List<DrinkAdditionalItem> drinkAdditionalItems;
 
     public Menu() {
         italianCuisine = new ItalianCuisine();

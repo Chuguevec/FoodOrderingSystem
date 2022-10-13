@@ -18,6 +18,6 @@ public enum DrinkItem implements PaidItem {
     }
 
     public Float getPrice() {
-        return null;
+        return price;
     }
 }

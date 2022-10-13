@@ -5,17 +5,17 @@ import org.foodOrder.item.DesertItem;
 import org.foodOrder.lunch.Lunch;
 
 public class LunchBuilder implements Builder{
-    Lunch lunch = new Lunch();
+   private Lunch lunch = new Lunch();
 
-    LunchBuilder course (CourseItem courseItem){
+   public LunchBuilder course (CourseItem courseItem){
         lunch.setCourse(courseItem);
         return this;
     }
-    LunchBuilder dessert (DesertItem desertItem){
+   public LunchBuilder dessert (DesertItem desertItem){
         lunch.setDesert(desertItem);
         return this;
     }
-    Lunch build (){
+    public Lunch build (){
         return lunch;
     }
 }
