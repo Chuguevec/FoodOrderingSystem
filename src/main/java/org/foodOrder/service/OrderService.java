@@ -1,6 +1,6 @@
 package org.foodOrder.service;
 
-import org.foodOrder.View;
+import org.foodOrder.view.View;
 import org.foodOrder.builder.DrinkBuilder;
 import org.foodOrder.builder.LunchBuilder;
 import org.foodOrder.builder.OrderBuilder;
@@ -16,7 +16,6 @@ import org.foodOrder.order.Order;
 
 import java.util.List;
 import java.util.Scanner;
-
 
 public class OrderService {
 
@@ -37,8 +36,9 @@ public class OrderService {
         Cuisine cuisine = chooseCuisine();
         Lunch lunch = cuisine == null ? null : chooseLunch(cuisine);
         Drink drink = chooseDrink();
+        order = new OrderBuilder().lunch(lunch).drink(drink).build();
+        view.printOrder(order);
     }
-
 
     private Cuisine chooseCuisine() {
         System.out.println("Выбирете кухню");
@@ -110,15 +110,15 @@ public class OrderService {
 
     private Drink chooseDrink() {
         DrinkItem drinkItem = chooseDrinkItem();
-        if(drinkItem != null){
-            List <DrinkAdditionalItem> additionalItem = chooseAdditionalItem();
+        if (drinkItem != null) {
+            List<DrinkAdditionalItem> additionalItem = chooseAdditionalItem();
             DrinkBuilder drinkBuilder = new DrinkBuilder().setDrink(drinkItem);
-            if(additionalItem != null && !additionalItem.isEmpty()){
+            if (additionalItem != null && !additionalItem.isEmpty()) {
                 for (DrinkAdditionalItem item : additionalItem) {
                     drinkBuilder.addAdditionalItem(item);
                 }
             }
-           return drinkBuilder.build();
+            return drinkBuilder.build();
         }
         return null;
     }
@@ -146,28 +146,32 @@ public class OrderService {
         List<DrinkAdditionalItem> additionalItems = menu.getDrinkAdditionalItems();
         System.out.println(NOTHING);
         view.printItem(additionalItems);
+        System.out.println("3. Лимон и Кубик люда");
         int count = 0;
         while (true) {
             System.out.println("Введите номер добавки:");
             if (scanner.hasNextInt()) {
                 count = scanner.nextInt();
-                if (count >= 0 && count <= additionalItems.size()) {
+                if (count >= 0 && count <= additionalItems.size() + 1) {
                     break;
                 }
             }
         }
-        switch (count){
-            case (1) : {
+        switch (count) {
+            case (1) -> {
                 return List.of(DrinkAdditionalItem.LEMON);
             }
-            case (2) : {
+            case (2) -> {
                 return List.of(DrinkAdditionalItem.ICE_CUBE);
             }
-            case (3) : {
+            case (3) -> {
                 return List.of(DrinkAdditionalItem.ICE_CUBE, DrinkAdditionalItem.LEMON);
             }
         }
         return null;
     }
 
+    public Order getOrder() {
+        return order;
+    }
 }

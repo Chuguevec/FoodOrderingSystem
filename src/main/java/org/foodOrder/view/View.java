@@ -1,11 +1,13 @@
-package org.foodOrder;
+package org.foodOrder.view;
 
 import org.foodOrder.cuisine.Cuisine;
-import org.foodOrder.item.CourseItem;
-import org.foodOrder.item.DesertItem;
+import org.foodOrder.drink.Drink;
+import org.foodOrder.drink.DrinkAdditionalItem;
 import org.foodOrder.item.Item;
 import org.foodOrder.item.PaidItem;
+import org.foodOrder.lunch.Lunch;
 import org.foodOrder.menu.Menu;
+import org.foodOrder.order.Order;
 
 import java.util.List;
 
@@ -26,7 +28,9 @@ public class View {
 
     private void printCuisineMenu(Cuisine cuisine) {
         System.out.println(cuisine.getName());
+        System.out.println("Courses:");
         printPaidItem(cuisine.getCourses());
+        System.out.println("Desserts:");
         printPaidItem(cuisine.getDeserts());
         System.out.println();
     }
@@ -35,7 +39,7 @@ public class View {
         System.out.println("Напитки:");
         printPaidItem(menu.getDrinks());
         System.out.println("К напиткам можно добавить:");
-        menu.getDrinkAdditionalItems().forEach((value) -> System.out.println(value.getName()));
+        printItem(menu.getDrinkAdditionalItems());
         System.out.println();
     }
 
@@ -57,5 +61,28 @@ public class View {
             Item item = items.get(i);
             System.out.println((i + 1) + ". " + item.getName());
         }
+    }
+    public void printOrder (Order order){
+        Lunch lunch = order.getLunch();
+        Drink drink = order.getDrink();
+        System.out.println("Ваш Заказ:");
+        double sumOrder = 0;
+        if (lunch != null){
+            System.out.println(lunch.getCourse().getName());
+            System.out.println(lunch.getDesert().getName());
+            sumOrder+= lunch.getCourse().getPrice() + lunch.getDesert().getPrice();
+        }
+        if (drink != null){
+            StringBuilder result = new StringBuilder();
+            result.append(drink.getDrinkItem().getName());
+            if (!drink.getDrinkAdditionalItems().isEmpty()){
+                for (DrinkAdditionalItem drinkAdditionalItem : drink.getDrinkAdditionalItems()) {
+                    result.append(" c ").append(drinkAdditionalItem.getName());
+                }
+            }
+            System.out.println(result);
+            sumOrder+= drink.getDrinkItem().getPrice();
+        }
+        System.out.println("Сумма заказа: " + sumOrder);
     }
 }
