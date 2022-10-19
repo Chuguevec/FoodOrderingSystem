@@ -1,5 +1,6 @@
 package org.foodOrder.menu;
 
+import org.foodOrder.cuisine.Cuisine;
 import org.foodOrder.cuisine.ItalianCuisine;
 import org.foodOrder.cuisine.MexicanCuisine;
 import org.foodOrder.cuisine.PolishCuisine;
@@ -16,11 +17,13 @@ public class Menu {
     private PolishCuisine polishCuisine;
    private List<DrinkItem> drinks;
    private List<DrinkAdditionalItem> drinkAdditionalItems;
+   private List <Cuisine> cuisines;
 
     public Menu() {
         italianCuisine = new ItalianCuisine();
         mexicanCuisine = new MexicanCuisine();
         polishCuisine = new PolishCuisine();
+        cuisines = List.of(italianCuisine, mexicanCuisine, polishCuisine);
         drinks = Stream.of(DrinkItem.values()).collect(Collectors.toList());
         drinkAdditionalItems = Stream.of(DrinkAdditionalItem.values()).collect(Collectors.toList());
     }
@@ -43,5 +46,8 @@ public class Menu {
 
     public List<DrinkAdditionalItem> getDrinkAdditionalItems() {
         return drinkAdditionalItems;
+    }
+    public List<Cuisine> getCuisines() {
+        return cuisines;
     }
 }
