@@ -27,9 +27,8 @@ public class View {
 
     public void showMenu() {
         System.out.println("Меню:");
-        printCuisineMenu(menu.getItalianCuisine());
-        printCuisineMenu(menu.getMexicanCuisine());
-        printCuisineMenu(menu.getPolishCuisine());
+        List<Cuisine> cuisines = menu.getCuisines();
+        cuisines.forEach(this::printCuisineMenu);
         printDrinks();
     }
 
